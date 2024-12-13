@@ -152,6 +152,7 @@ function subjectCardTopSection(subjectCardElement,subject,subjectContainerId){
                 } )
             subjectsList.splice(deleteElementIndex,1);
             localStorage.setItem("subjectsList",JSON.stringify(subjectsList));
+            overAllAttendanceContainer.onclick();
         }
         
     }

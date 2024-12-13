@@ -86,12 +86,17 @@ overAllAttendanceContainer.onclick=function(){
         totalAttendedClasses=totalAttendedClasses+subject.attendedCount;
         totalClassesTaken=totalClassesTaken+subject.totalCount;
     }
+    let overAllAttendancePercentage;
     if(totalClassesTaken){
-        let overAllAttendancePercentage=((totalAttendedClasses/totalClassesTaken)*100).toFixed(2);
-        overAllAttendance.textContent=overAllAttendancePercentage+"%";
-        myOverallAttendance.overallPercent=overAllAttendancePercentage;
-        localStorage.setItem("myOverallAttendance",JSON.stringify(myOverallAttendance));
+        overAllAttendancePercentage=((totalAttendedClasses/totalClassesTaken)*100).toFixed(2);
     }
+    else{
+        overAllAttendancePercentage=0;
+    }   
+    overAllAttendance.textContent=overAllAttendancePercentage+"%";
+    myOverallAttendance.overallPercent=overAllAttendancePercentage;
+    localStorage.setItem("myOverallAttendance",JSON.stringify(myOverallAttendance));
+    
     
 }
 
@@ -454,6 +459,7 @@ function subjectCardBottomSection(subjectCardElement,subject){
         subjectsList[resetElementIndex].totalCount=0;
         subjectsList[resetElementIndex].attendedCount=0;
         localStorage.setItem("subjectsList",JSON.stringify(subjectsList));
+        overAllAttendanceContainer.onclick();
     }
 }
 

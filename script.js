@@ -437,30 +437,33 @@ function subjectCardBottomSection(subjectCardElement,subject){
     resetButton.textContent="Reset";
     buttonsContainer.appendChild(resetButton);
 
-    resetButton.onclick=function(){   
-        subjectAttendanceStatusText.textContent="Attendance status will be reflected here";
-        subjectAttendanceStatusText.style.color="#058b1c";
-        subjectAttendancePercent.textContent="0%";
-        let resetElementIndex=subjectsList.findIndex(
-            function(eachSubject){
-                let eachSubjectId=eachSubject.uniqueId;
-                if(eachSubjectId===subject.uniqueId){
-                    return true;
+    resetButton.onclick=function(){ 
+        let check=confirm("Reset the attendance of this subject ?");
+        if(check==1){
+            subjectAttendanceStatusText.textContent="Attendance status will be reflected here";
+            subjectAttendanceStatusText.style.color="#058b1c";
+            subjectAttendancePercent.textContent="0%";
+            let resetElementIndex=subjectsList.findIndex(
+                function(eachSubject){
+                    let eachSubjectId=eachSubject.uniqueId;
+                    if(eachSubjectId===subject.uniqueId){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
                 }
-                else{
-                    return false;
-                }
-            }
-        );
-        let totalClassesCount=document.getElementById("totalCount"+subject.uniqueId);
-        let attendedClassesCount=document.getElementById("attendedCount"+subject.uniqueId);
-        attendedClassesCount.textContent=0;
-        totalClassesCount.textContent=0;
-        subjectsList[resetElementIndex].subPercent=0;
-        subjectsList[resetElementIndex].totalCount=0;
-        subjectsList[resetElementIndex].attendedCount=0;
-        localStorage.setItem("subjectsList",JSON.stringify(subjectsList));
-        overAllAttendanceContainer.onclick();
+            );
+            let totalClassesCount=document.getElementById("totalCount"+subject.uniqueId);
+            let attendedClassesCount=document.getElementById("attendedCount"+subject.uniqueId);
+            attendedClassesCount.textContent=0;
+            totalClassesCount.textContent=0;
+            subjectsList[resetElementIndex].subPercent=0;
+            subjectsList[resetElementIndex].totalCount=0;
+            subjectsList[resetElementIndex].attendedCount=0;
+            localStorage.setItem("subjectsList",JSON.stringify(subjectsList));
+            overAllAttendanceContainer.onclick();
+        }
     }
 }
 
